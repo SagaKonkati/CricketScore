@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CricketScore</title>
+</head>
+
+<body>
+    <h1>Cricket Score Program</h1>
+    <ol>
+        <li>Open this file in browser</li>
+        <li>Open DevTools of browser or press F12</li>
+        <li>In DevTools, open console tab to see results</li>
+    </ol>
+    <script>
+        class CricketTeam {
+            name = "";
+            points = "";
+            matches = [];
+            constructor(name, points, matches) {
+                this.name = name;
+                this.points = points;
+                this.matches = matches;
+                return {
+                    name: this.name,
+                    points: this.points,
+                    matches: this.matches
+                };
+            }
+        }
+        function getTeamHavingNConsecutiveLosses(Teams = [], lossCount = 0) {
+            if (lossCount) {
+                teams = [];
+                Teams.forEach((team) => {
+                    count = 0;
+                    team.matches.forEach((isMatchWon) => {
+                        if (isMatchWon == false) {
+                            count++;
+                        } else {
+                            // console.log(team.name, lossCount, count);
+                            if (!(count >= lossCount)) {
+                                count = 0;
+                            }
+                        }
+                    });
+                    // console.log(team.name, count);
+                    if (count >= lossCount) {
+                        teams.push(team);
+                    }
+                });
+                console.log(lossCount + " Consecutive Losses", teams);
+                let avg = 0;
+                teams.forEach((team) => {
+                    avg += team.points;
+                });
+                if (teams.length) {
+                    console.log("Average points of Teams is " + (avg / teams.length));
+                }
+                console.log("--------------");
+                return teams;
+            }
+
+        }
+        function getTeamHavingNConsecutiveWins(Teams = [], winCount = 0) {
+            if (winCount) {
+                teams = [];
+                Teams.forEach((team) => {
+                    count = 0;
+                    team.matches.forEach((isMatchWon) => {
+                        if (isMatchWon == true) {
+                            count++;
+                        } else {
+                            // console.log(team.name, winCount, count);
+                            if (!(count >= winCount)) {
+                                count = 0;
+                            }
+                        }
+                    });
+                    // console.log(team.name, count);
+                    if (count >= winCount) {
+                        teams.push(team);
+                    }
+                });
+                console.log(winCount + " Consecutive Wins", teams);
+                let avg = 0;
+                teams.forEach((team) => {
+                    avg += team.points;
+                });
+                if (teams.length) {
+                    console.log("Average points of Teams is " + (avg / teams.length));
+                }
+                console.log("--------------");
+                return teams;
+            }
+        }
+        let Teams = [
+            new CricketTeam("A", 20, [true, true, false, false, true]),
+            new CricketTeam("B", 18, [true, false, false, false, true]),
+            new CricketTeam("C", 16, [true, true, false, false, true]),
+            new CricketTeam("D", 14, [true, false, true, false, false]),
+            new CricketTeam("E", 14, [true, true, false, true, false]),
+            new CricketTeam("F", 12, [false, true, false, true, false]),
+        ];
+
+        console.log("Teams");
+
+        console.log(Teams);
+
+        console.log("getTeamHavingNConsecutiveLosses");
+
+        // getTeamHavingNConsecutiveLosses
+
+        getTeamHavingNConsecutiveLosses(Teams, 0);
+        getTeamHavingNConsecutiveLosses(Teams, 1);
+        getTeamHavingNConsecutiveLosses(Teams, 2);
+        getTeamHavingNConsecutiveLosses(Teams, 3);
+        getTeamHavingNConsecutiveLosses(Teams, 4);
+
+        console.log("getTeamHavingNConsecutiveWins");
+
+        // getTeamHavingNConsecutiveWins
+
+        getTeamHavingNConsecutiveWins(Teams, 0);
+        getTeamHavingNConsecutiveWins(Teams, 1);
+        getTeamHavingNConsecutiveWins(Teams, 2);
+        getTeamHavingNConsecutiveWins(Teams, 3);
+        getTeamHavingNConsecutiveWins(Teams, 4);
+    </script>
+</body>
+
+</html>
